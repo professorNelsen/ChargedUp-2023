@@ -37,11 +37,15 @@ public class OI {
 		new Trigger(() -> driverController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Drivetrain_XStance()); // Defensive X-stance command
 
 		/* Gripper Actions */
-        new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new InstantCommand(() -> Robot.gripper.toggle()));
+        new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new InstantCommand(() -> Robot.gripper.toggle()));
 
 		/* Arm Actions */
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new Arm_SetPosition(RobotMap.kIntakeArmPosition, RobotMap.kIntakeExtendPosition));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Arm_SetPosition(40,0));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new Arm_SetPosition(RobotMap.kIntakeArmPosition, RobotMap.kIntakeExtendPosition));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Arm_SetPosition(RobotMap.kScoringArmPosition1,RobotMap.kScoringExtendPosition1));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onTrue(new Arm_SetPosition(RobotMap.kArmDrivePosition,RobotMap.kExtendDrivePoistion));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new Arm_SetPosition(RobotMap.kScoringArmPosition2,RobotMap.kScoringExtendPosition2));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Arm_SetPosition(RobotMap.kShelfIntakeArmPosition,RobotMap.kShelfIntakeExtendPosition));
+
 	}
 
     /** Access to the driving axes values *****************************
