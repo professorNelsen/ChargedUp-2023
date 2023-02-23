@@ -1,7 +1,9 @@
 package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
+import org.usfirst.frc.team3042.robot.commands.Arm_SetExtend;
 import org.usfirst.frc.team3042.robot.commands.Arm_SetPosition;
+import org.usfirst.frc.team3042.robot.commands.Arm_SetRotation;
 import org.usfirst.frc.team3042.robot.commands.Drivetrain_XStance;
 
 import edu.wpi.first.wpilibj.GenericHID;
