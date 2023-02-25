@@ -37,17 +37,23 @@ public class Arm_SetPosition extends CommandBase {
 
     boolean extensionGoalReached = (Math.abs(extensionError) <= RobotMap.extensionThreshold);
     boolean inIntakePosition = Math.abs(arm.getRotationMotorPosition() - RobotMap.kIntakeArmPosition) <= RobotMap.rotationThreshold;
-
-    // When going to the intake position, we will wait for the extension to move first before rotating the arm
-    if (rotationPositionGoal != RobotMap.kIntakeArmPosition || (rotationPositionGoal == RobotMap.kIntakeArmPosition && extensionGoalReached)) {
-
-      // THIS BLOCK OF CODE BELOW ROTATES THE ARM SHOULDER //
+    boolean rotationGoalReached = (Math.abs(rotationError) <= RobotMap.rotationThreshold); //added for switching rotation before extension
+  
+    // When going to the intake position, we will wait for the extension to move first before rotating the arm  (changed to driverpositon which retracts before rotation)
+    if (rotationPositionGoal != RobotMap.kArmDrivePosition || (rotationPositionGoal == RobotMap.kArmDrivePosition && extensionGoalReached)) {
+    //added in statements for other positions, just reversing the command to rotation before extension  (guessing here) 
+    if (extensionPositionGoal != RobotMap.kIntakeArmPosition || (extensionPositionGoal == RobotMap.kIntakeArmPosition && rotationGoalReached)) {
+    if (extensionPositionGoal != RobotMap.kScoringArmPosition1 || (extensionPositionGoal == RobotMap.kScoringArmPosition1 && rotationGoalReached)) {
+    if (extensionPositionGoal != RobotMap.kScoringArmPosition2 || (extensionPositionGoal == RobotMap.kScoringArmPosition2 && rotationGoalReached)) {
+    if (extensionPositionGoal != RobotMap.kShelfIntakeArmPosition || (extensionPositionGoal == RobotMap.kShelfIntakeArmPosition && rotationGoalReached)) {
+     
+     // THIS BLOCK OF CODE BELOW ROTATES THE ARM SHOULDER //
       double minimalVoltage = RobotMap.levelVoltage * Math.sin(arm.getArmAngle()); // TODO: Also scale this minimalVoltage by how far the arm is extended somehow?
       arm.setVoltageRotationMotor(minimalVoltage + (rotationError * RobotMap.rotation_kP)); 
 
     }
-    
-    // We are only going to move the extension if the arm is NOT in the intake position
+  
+    // We are only going to move the extension if the arm is NOT in the intake position -- NOT DONE?????
     if (!inIntakePosition) {
 
       // THIS BLOCK OF CODE BELOW MOVES THE EXTENSION //
@@ -58,7 +64,7 @@ public class Arm_SetPosition extends CommandBase {
         arm.stopExtendMotor();
       }
 
-    }
+    }  //error here? cannot see any changes from past????
   }
 
   // Called once the command ends or is interrupted.
